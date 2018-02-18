@@ -1,0 +1,28 @@
+{
+  "name": "canvas-heightmap",
+  "version": "0.0.0",
+  "description": "Canvas heightmap generator",
+  "main": "./src/CanvasHeighmap.js",
+  "scripts": {
+    "lint": "eslint ./src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1oginov/canvas-heightmap.git"
+  },
+  "keywords": [
+    "canvas",
+    "generator",
+    "heightmap"
+  ],
+  "author": "Danila Loginov <danila@loginov.rocks> (https://loginov.rocks)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/1oginov/canvas-heightmap/issues"
+  },
+  "homepage": "https://github.com/1oginov/canvas-heightmap",
+  "devDependencies": {
+    "eslint": "^4.18.0",
+    "eslint-config-google": "^0.9.1"
+  }
+}
