@@ -55,4 +55,21 @@ describe('CanvasHeightmap', () => {
       return assert.isRejected(ch.use(5));
     });
   });
+
+  describe('draw', () => {
+    it('should throw an error if source is not specified', () => {
+      assert.throws(() => {
+        ch.draw();
+      });
+    });
+
+    it('should return HTMLCanvasElement', () => {
+      return ch.use(resources.blackAndWhite).
+          then(() => {
+            const canvas = ch.draw();
+            return assert.strictEqual(canvas.constructor.name,
+                'HTMLCanvasElement');
+          });
+    });
+  });
 });
