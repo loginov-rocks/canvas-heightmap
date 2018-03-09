@@ -102,23 +102,45 @@ class CanvasHeightmap {
    * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData
    * @see https://developer.mozilla.org/en-US/docs/Web/API/ImageData/data
    * @param {number} [sx=0] - The x coordinate of the upper left corner of the
-   *                          rectangle from which the ImageData will be
-   *                          extracted.
+   *                          rectangle from which the data will be extracted.
    * @param {number} [sy=0] - The y coordinate of the upper left corner of the
-   *                          rectangle from which the ImageData will be
-   *                          extracted.
+   *                          rectangle from which the data will be extracted.
    * @param {number} [sw=this._width] - The width of the rectangle from which
-   *                                    the ImageData will be extracted.
+   *                                    the data will be extracted.
    * @param {number} [sh=this._height] - The height of the rectangle from which
-   *                                     the ImageData will be extracted.
+   *                                     the data will be extracted.
    * @return {Uint8ClampedArray}
    */
-  getArray(sx = 0, sy = 0, sw = this._width, sh = this._height) {
+  getFlatArray(sx = 0, sy = 0, sw = this._width, sh = this._height) {
     if (!this._canvas) {
       throw new Error('Canvas is not ready');
     }
 
     return this._canvas.getContext('2d').getImageData(sx, sy, sw, sh).data;
+  }
+
+  /**
+   * Get two-dimensional array containing the data by pixels and RGBA array for
+   * each, with integer values between 0 and 255 (included).
+   * @param {number} [sx=0] - The x coordinate of the upper left corner of the
+   *                          rectangle from which the data will be extracted.
+   * @param {number} [sy=0] - The y coordinate of the upper left corner of the
+   *                          rectangle from which the data will be extracted.
+   * @param {number} [sw=this._width] - The width of the rectangle from which
+   *                                    the data will be extracted.
+   * @param {number} [sh=this._height] - The height of the rectangle from which
+   *                                     the data will be extracted.
+   * @return {Array<Uint8ClampedArray>}
+   */
+  getFlatRgbaArray(sx = 0, sy = 0, sw = this._width, sh = this._height) {
+    const flatArray = this.getFlatArray(sx, sy, sw, sh);
+    const flatRgbaArray = [];
+
+    for (let i = 0; i < flatArray.length; i += 4) {
+      flatRgbaArray.push(flatRgbaArray.slice(i, i + 4));
+    }
+
+    return flatRgbaArray;
   }
 }
 

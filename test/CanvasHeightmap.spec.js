@@ -79,10 +79,10 @@ describe('CanvasHeightmap', () => {
     });
   });
 
-  describe('getArray', () => {
+  describe('getFlatArray', () => {
     it('should throw an error if canvas is not ready', () => {
       assert.throws(() => {
-        ch.getArray();
+        ch.getFlatArray();
       });
     });
 
@@ -90,7 +90,7 @@ describe('CanvasHeightmap', () => {
       return ch.use(resources.blackAndWhite.url).
           then(() => {
             ch.draw();
-            const array = ch.getArray();
+            const array = ch.getFlatArray();
             return assert.strictEqual(array.length, 4 *
                 resources.blackAndWhite.height * resources.blackAndWhite.width);
           });
@@ -104,7 +104,40 @@ describe('CanvasHeightmap', () => {
 
             const {height, width} = resources.blackAndWhite;
             const length = 4 * (height / 2) * (width / 4);
-            const array = ch.getArray(width / 8, height / 4, width / 4,
+            const array = ch.getFlatArray(width / 8, height / 4, width / 4,
+                height / 2);
+
+            return assert.strictEqual(array.length, length);
+          });
+    });
+  });
+
+  describe('getFlatRgbaArray', () => {
+    it('should throw an error if canvas is not ready', () => {
+      assert.throws(() => {
+        ch.getFlatRgbaArray();
+      });
+    });
+
+    it('should return array with length equal to height * width', () => {
+      return ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+            const array = ch.getFlatRgbaArray();
+            return assert.strictEqual(array.length,
+                resources.blackAndWhite.height * resources.blackAndWhite.width);
+          });
+    });
+
+    it('should return cropped array with length equal to ' +
+        '(height / 2) * (width / 4)', () => {
+      return ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+
+            const {height, width} = resources.blackAndWhite;
+            const length = (height / 2) * (width / 4);
+            const array = ch.getFlatRgbaArray(width / 8, height / 4, width / 4,
                 height / 2);
 
             return assert.strictEqual(array.length, length);
