@@ -112,6 +112,39 @@ describe('CanvasHeightmap', () => {
     });
   });
 
+  describe('getFlatAverageArray', () => {
+    it('should throw an error if canvas is not ready', () => {
+      assert.throws(() => {
+        ch.getFlatAverageArray();
+      });
+    });
+
+    it('should return array with length equal to height * width', () => {
+      return ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+            const array = ch.getFlatAverageArray();
+            return assert.strictEqual(array.length,
+                resources.blackAndWhite.height * resources.blackAndWhite.width);
+          });
+    });
+
+    it('should return cropped array with length equal to ' +
+        '(height / 2) * (width / 4)', () => {
+      return ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+
+            const {height, width} = resources.blackAndWhite;
+            const length = (height / 2) * (width / 4);
+            const array = ch.getFlatAverageArray(width / 8, height / 4,
+                width / 4, height / 2);
+
+            return assert.strictEqual(array.length, length);
+          });
+    });
+  });
+
   describe('getFlatChannelArray', () => {
     it('should throw an error if canvas is not ready', () => {
       assert.throws(() => {
@@ -183,6 +216,23 @@ describe('CanvasHeightmap', () => {
                 width / 4, height / 2);
 
             return assert.strictEqual(array.length, length);
+          });
+    });
+
+    it('should return the same data for each of RGB channels as' +
+        '`getFlatAverageArray` for black and white image', () => {
+      return ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+
+            const redArray = ch.getFlatChannelArray('red');
+            const greenArray = ch.getFlatChannelArray('green');
+            const blueArray = ch.getFlatChannelArray('blue');
+            const averageArray = ch.getFlatAverageArray();
+
+            assert.deepEqual(redArray, averageArray);
+            assert.deepEqual(greenArray, averageArray);
+            return assert.deepEqual(blueArray, averageArray);
           });
     });
   });

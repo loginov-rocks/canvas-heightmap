@@ -120,6 +120,31 @@ class CanvasHeightmap {
   }
 
   /**
+   * Get one-dimensional array containing the data by pixels with average over
+   * RGB channels, with integer values between 0 and 255 (included).
+   * @param {number} [sx=0] - The x coordinate of the upper left corner of the
+   *                          rectangle from which the data will be extracted.
+   * @param {number} [sy=0] - The y coordinate of the upper left corner of the
+   *                          rectangle from which the data will be extracted.
+   * @param {number} [sw=this._width] - The width of the rectangle from which
+   *                                    the data will be extracted.
+   * @param {number} [sh=this._height] - The height of the rectangle from which
+   *                                     the data will be extracted.
+   * @return {Uint8ClampedArray}
+   */
+  getFlatAverageArray(sx = 0, sy = 0, sw = this._width, sh = this._height) {
+    const flatArray = this.getFlatArray(sx, sy, sw, sh);
+    const flatAverageArray = new Uint8ClampedArray(flatArray.length / 4);
+
+    for (let i = 0, j = 0; i < flatArray.length; i += 4, j++) {
+      flatAverageArray[j] = flatArray.slice(i, i + 3).
+          reduce((a, b) => a + b, 0) / 3;
+    }
+
+    return flatAverageArray;
+  }
+
+  /**
    * Get one-dimensional array containing the data for specified channel, with
    * integer values between 0 and 255 (included).
    * @param {string} channel - Channel: 'red', 'green', 'blue' or 'alpha'.
