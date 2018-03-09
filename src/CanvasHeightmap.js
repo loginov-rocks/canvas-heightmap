@@ -120,6 +120,55 @@ class CanvasHeightmap {
   }
 
   /**
+   * Get one-dimensional array containing the data for specified channel, with
+   * integer values between 0 and 255 (included).
+   * @param {string} channel - Channel: 'red', 'green', 'blue' or 'alpha'.
+   * @param {number} [sx=0] - The x coordinate of the upper left corner of the
+   *                          rectangle from which the data will be extracted.
+   * @param {number} [sy=0] - The y coordinate of the upper left corner of the
+   *                          rectangle from which the data will be extracted.
+   * @param {number} [sw=this._width] - The width of the rectangle from which
+   *                                    the data will be extracted.
+   * @param {number} [sh=this._height] - The height of the rectangle from which
+   *                                     the data will be extracted.
+   * @return {Uint8ClampedArray}
+   */
+  getFlatChannelArray(channel, sx = 0, sy = 0, sw = this._width,
+                      sh = this._height) {
+    if (['red', 'green', 'blue', 'alpha'].indexOf(channel) === -1) {
+      throw new Error('Unknown channel');
+    }
+
+    const flatArray = this.getFlatArray(sx, sy, sw, sh);
+    const flatChannelArray = new Uint8ClampedArray(flatArray.length / 4);
+
+    let i = 0;
+
+    switch (channel) {
+      case 'red':
+        break;
+
+      case 'green':
+        i = 1;
+        break;
+
+      case 'blue':
+        i = 2;
+        break;
+
+      case 'alpha':
+        i = 3;
+        break;
+    }
+
+    for (let j = 0; i < flatArray.length; i += 4, j++) {
+      flatChannelArray[j] = flatArray[i];
+    }
+
+    return flatChannelArray;
+  }
+
+  /**
    * Get two-dimensional array containing the data by pixels and RGBA array for
    * each, with integer values between 0 and 255 (included).
    * @param {number} [sx=0] - The x coordinate of the upper left corner of the

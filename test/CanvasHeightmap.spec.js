@@ -112,6 +112,81 @@ describe('CanvasHeightmap', () => {
     });
   });
 
+  describe('getFlatChannelArray', () => {
+    it('should throw an error if canvas is not ready', () => {
+      assert.throws(() => {
+        ch.getFlatChannelArray('red');
+      });
+    });
+
+    it('should throw an error if channel specified is unknown', () => {
+      return assert.isRejected(ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+            ch.getFlatChannelArray('unknown');
+          }));
+    });
+
+    it('should return array for red channel with length equal to ' +
+        'height * width', () => {
+      return ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+            const array = ch.getFlatChannelArray('red');
+            return assert.strictEqual(array.length,
+                resources.blackAndWhite.height * resources.blackAndWhite.width);
+          });
+    });
+
+    it('should return array for green channel with length equal to ' +
+        'height * width', () => {
+      return ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+            const array = ch.getFlatChannelArray('green');
+            return assert.strictEqual(array.length,
+                resources.blackAndWhite.height * resources.blackAndWhite.width);
+          });
+    });
+
+    it('should return array for blue channel with length equal to ' +
+        'height * width', () => {
+      return ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+            const array = ch.getFlatChannelArray('blue');
+            return assert.strictEqual(array.length,
+                resources.blackAndWhite.height * resources.blackAndWhite.width);
+          });
+    });
+
+    it('should return array for alpha channel with length equal to ' +
+        'height * width', () => {
+      return ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+            const array = ch.getFlatChannelArray('alpha');
+            return assert.strictEqual(array.length,
+                resources.blackAndWhite.height * resources.blackAndWhite.width);
+          });
+    });
+
+    it('should return cropped array with length equal to ' +
+        '(height / 2) * (width / 4)', () => {
+      return ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+
+            const {height, width} = resources.blackAndWhite;
+            const length = (height / 2) * (width / 4);
+            const array = ch.getFlatChannelArray('red', width / 8, height / 4,
+                width / 4, height / 2);
+
+            return assert.strictEqual(array.length, length);
+          });
+    });
+  });
+
   describe('getFlatRgbaArray', () => {
     it('should throw an error if canvas is not ready', () => {
       assert.throws(() => {
