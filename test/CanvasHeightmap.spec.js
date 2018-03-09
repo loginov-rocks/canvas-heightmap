@@ -270,6 +270,14 @@ describe('CanvasHeightmap', () => {
     });
   });
 
+  describe('getAverageArray', () => {
+    // TODO
+  });
+
+  describe('getChannelArray', () => {
+    // TODO
+  });
+
   describe('getRgbaArray', () => {
     it('should throw an error if canvas is not ready', () => {
       assert.throws(() => {

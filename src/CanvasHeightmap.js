@@ -218,6 +218,46 @@ class CanvasHeightmap {
   }
 
   /**
+   * Get two-dimensional array containing the rows and cols data by pixels with
+   * average over RGB channels, with integer values between 0 and 255
+   * (included).
+   * @param {number} [sx=0] - The x coordinate of the upper left corner of the
+   *                          rectangle from which the data will be extracted.
+   * @param {number} [sy=0] - The y coordinate of the upper left corner of the
+   *                          rectangle from which the data will be extracted.
+   * @param {number} [sw=this._width] - The width of the rectangle from which
+   *                                    the data will be extracted.
+   * @param {number} [sh=this._height] - The height of the rectangle from which
+   *                                     the data will be extracted.
+   * @return {Array<Uint8ClampedArray>}
+   */
+  getAverageArray(sx = 0, sy = 0, sw = this._width, sh = this._height) {
+    return this.constructor.
+        _transformFlatTo2d(this.getFlatAverageArray(sx, sy, sw, sh), sw);
+  }
+
+  /**
+   * Get two-dimensional array containing the rows and cols data for specified
+   * channel, with integer values between 0 and 255 (included).
+   * @param {string} channel - Channel: 'red', 'green', 'blue' or 'alpha'.
+   * @param {number} [sx=0] - The x coordinate of the upper left corner of the
+   *                          rectangle from which the data will be extracted.
+   * @param {number} [sy=0] - The y coordinate of the upper left corner of the
+   *                          rectangle from which the data will be extracted.
+   * @param {number} [sw=this._width] - The width of the rectangle from which
+   *                                    the data will be extracted.
+   * @param {number} [sh=this._height] - The height of the rectangle from which
+   *                                     the data will be extracted.
+   * @return {Array<Uint8ClampedArray>}
+   */
+  getChannelArray(channel, sx = 0, sy = 0, sw = this._width,
+                  sh = this._height) {
+    return this.constructor.
+        _transformFlatTo2d(this.getFlatChannelArray(channel, sx, sy, sw, sh),
+            sw);
+  }
+
+  /**
    * Get three-dimensional array containing the rows and cols data by pixels
    * and RGBA array for each, with integer values between 0 and 255 (included).
    * @param {number} [sx=0] - The x coordinate of the upper left corner of the
@@ -231,14 +271,25 @@ class CanvasHeightmap {
    * @return {Array<Array<Uint8ClampedArray>>}
    */
   getRgbaArray(sx = 0, sy = 0, sw = this._width, sh = this._height) {
-    const flatRgbaArray = this.getFlatRgbaArray(sx, sy, sw, sh);
-    const rgbaArray = [];
+    return this.constructor.
+        _transformFlatTo2d(this.getFlatRgbaArray(sx, sy, sw, sh), sw);
+  }
 
-    for (let i = 0; i < flatRgbaArray.length; i += sw) {
-      rgbaArray.push(flatRgbaArray.slice(i, i + sw));
+  /**
+   * Transform flat array to 2D divided by rows and cols.
+   * @param {Array} flatArray
+   * @param {number} width
+   * @return {Array}
+   * @private
+   */
+  static _transformFlatTo2d(flatArray, width) {
+    const array = [];
+
+    for (let i = 0; i < flatArray.length; i += width) {
+      array.push(flatArray.slice(i, i + width));
     }
 
-    return rgbaArray;
+    return array;
   }
 }
 
