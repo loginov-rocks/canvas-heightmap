@@ -144,4 +144,43 @@ describe('CanvasHeightmap', () => {
           });
     });
   });
+
+  describe('getRgbaArray', () => {
+    it('should throw an error if canvas is not ready', () => {
+      assert.throws(() => {
+        ch.getRgbaArray();
+      });
+    });
+
+    it('should return array with rows number equal to height and cols number ' +
+        'equal to width', () => {
+      return ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+            const array = ch.getRgbaArray();
+            // Number of rows.
+            assert.strictEqual(array.length, resources.blackAndWhite.height);
+            // Number of cols for the first row.
+            return assert.strictEqual(array[0].length,
+                resources.blackAndWhite.width);
+          });
+    });
+
+    it('should return cropped array with rows number equal to (height / 2) ' +
+        ' and cols number equal to (width / 4)', () => {
+      return ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+
+            const {height, width} = resources.blackAndWhite;
+            const array = ch.getRgbaArray(width / 8, height / 4, width / 4,
+                height / 2);
+
+            // Number of rows.
+            assert.strictEqual(array.length, height / 2);
+            // Number of cols for the first row.
+            return assert.strictEqual(array[0].length, width / 4);
+          });
+    });
+  });
 });

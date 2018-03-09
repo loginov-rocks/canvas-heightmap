@@ -137,10 +137,34 @@ class CanvasHeightmap {
     const flatRgbaArray = [];
 
     for (let i = 0; i < flatArray.length; i += 4) {
-      flatRgbaArray.push(flatRgbaArray.slice(i, i + 4));
+      flatRgbaArray.push(flatArray.slice(i, i + 4));
     }
 
     return flatRgbaArray;
+  }
+
+  /**
+   * Get three-dimensional array containing the rows and cols data by pixels
+   * and RGBA array for each, with integer values between 0 and 255 (included).
+   * @param {number} [sx=0] - The x coordinate of the upper left corner of the
+   *                          rectangle from which the data will be extracted.
+   * @param {number} [sy=0] - The y coordinate of the upper left corner of the
+   *                          rectangle from which the data will be extracted.
+   * @param {number} [sw=this._width] - The width of the rectangle from which
+   *                                    the data will be extracted.
+   * @param {number} [sh=this._height] - The height of the rectangle from which
+   *                                     the data will be extracted.
+   * @return {Array<Array<Uint8ClampedArray>>}
+   */
+  getRgbaArray(sx = 0, sy = 0, sw = this._width, sh = this._height) {
+    const flatRgbaArray = this.getFlatRgbaArray(sx, sy, sw, sh);
+    const rgbaArray = [];
+
+    for (let i = 0; i < flatRgbaArray.length; i += sw) {
+      rgbaArray.push(flatRgbaArray.slice(i, i + sw));
+    }
+
+    return rgbaArray;
   }
 }
 
