@@ -95,6 +95,31 @@ class CanvasHeightmap {
 
     return this._canvas;
   }
+
+  /**
+   * Get one-dimensional array containing the data in the RGBA order, with
+   * integer values between 0 and 255 (included).
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/ImageData/data
+   * @param {number} [sx=0] - The x coordinate of the upper left corner of the
+   *                          rectangle from which the ImageData will be
+   *                          extracted.
+   * @param {number} [sy=0] - The y coordinate of the upper left corner of the
+   *                          rectangle from which the ImageData will be
+   *                          extracted.
+   * @param {number} [sw=this._width] - The width of the rectangle from which
+   *                                    the ImageData will be extracted.
+   * @param {number} [sh=this._height] - The height of the rectangle from which
+   *                                     the ImageData will be extracted.
+   * @return {Uint8ClampedArray}
+   */
+  getArray(sx = 0, sy = 0, sw = this._width, sh = this._height) {
+    if (!this._canvas) {
+      throw new Error('Canvas is not ready');
+    }
+
+    return this._canvas.getContext('2d').getImageData(sx, sy, sw, sh).data;
+  }
 }
 
 // Export class as a module to support requiring.
