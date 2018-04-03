@@ -5,17 +5,32 @@
 [![devDependencies Status](https://david-dm.org/1oginov/canvas-heightmap/dev-status.svg)](https://david-dm.org/1oginov/canvas-heightmap?type=dev)
 [![Greenkeeper badge](https://badges.greenkeeper.io/1oginov/canvas-heightmap.svg)](https://greenkeeper.io/)
 
-Under construction...
+Canvas Heightmap is a package to **get images data by pixels, channels or average in different representations** that
+can be used to build heightmaps.
 
 ## Quick Start
 
 ### Install
 
-TODO
+```sh
+npm install canvas-heightmap
+```
 
 ### Use
 
-TODO
+```js
+const ch = new CanvasHeightmap();
+
+// At first set the source and wait until it would be loaded.
+ch.use('https://raw.githubusercontent.com/1oginov/canvas-heightmap/master/test/resources/black-and-white.png').
+    then(() => {
+      // Secondly invoke draw method to render image to be able to get its data.
+      ch.draw();
+      // Eventually you can get needed data.
+      const flatArray = ch.getFlatArray();
+      const rgbaArray = ch.getRgbaArray();
+    });
+```
 
 ## API
 
@@ -25,17 +40,17 @@ Canvas Heightmap class.
 
 **Kind**: global class
 
-* [CanvasHeightmap](#CanvasHeightmap)
-  * [new CanvasHeightmap()](#new_CanvasHeightmap_new)
-  * [use(source) ⇒ Promise.<HTMLImageElement|HTMLCanvasElement>](#CanvasHeightmap+use)
-  * [draw() ⇒ HTMLCanvasElement](#CanvasHeightmap+draw)
-  * [getFlatArray([sx], [sy], [sw], [sh]) ⇒ Uint8ClampedArray](#CanvasHeightmap+getFlatArray)
-  * [getFlatAverageArray([sx], [sy], [sw], [sh]) ⇒ Uint8ClampedArray](#CanvasHeightmap+getFlatAverageArray)
-  * [getFlatChannelArray(channel, [sx], [sy], [sw], [sh]) ⇒ Uint8ClampedArray](#CanvasHeightmap+getFlatChannelArray)
-  * [getFlatRgbaArray([sx], [sy], [sw], [sh]) ⇒ Array.<Uint8ClampedArray>](#CanvasHeightmap+getFlatRgbaArray)
-  * [getAverageArray([sx], [sy], [sw], [sh]) ⇒ Array.<Uint8ClampedArray>](#CanvasHeightmap+getAverageArray)
-  * [getChannelArray(channel, [sx], [sy], [sw], [sh]) ⇒ Array.<Uint8ClampedArray>](#CanvasHeightmap+getChannelArray)
-  * [getRgbaArray([sx], [sy], [sw], [sh]) ⇒ Array.<Array.<Uint8ClampedArray>>](#CanvasHeightmap+getRgbaArray)
+* [CanvasHeightmap](#canvasheightmap)
+  * [new CanvasHeightmap()](#new-canvasheightmap)
+  * [use(source) ⇒ Promise.&lt;HTMLImageElement|HTMLCanvasElement&gt;](#usesource--promisehtmlimageelementhtmlcanvaselement)
+  * [draw() ⇒ HTMLCanvasElement](#draw--htmlcanvaselement)
+  * [getFlatArray([sx], [sy], [sw], [sh]) ⇒ Uint8ClampedArray](#getflatarraysx-sy-sw-sh--uint8clampedarray)
+  * [getFlatAverageArray([sx], [sy], [sw], [sh]) ⇒ Uint8ClampedArray](#getflataveragearraysx-sy-sw-sh--uint8clampedarray)
+  * [getFlatChannelArray(channel, [sx], [sy], [sw], [sh]) ⇒ Uint8ClampedArray](#getflatchannelarraychannel-sx-sy-sw-sh--uint8clampedarray)
+  * [getFlatRgbaArray([sx], [sy], [sw], [sh]) ⇒ Array.&lt;Uint8ClampedArray&gt;](#getflatrgbaarraysx-sy-sw-sh--arrayuint8clampedarray)
+  * [getAverageArray([sx], [sy], [sw], [sh]) ⇒ Array.&lt;Uint8ClampedArray&gt;](#getaveragearraysx-sy-sw-sh--arrayuint8clampedarray)
+  * [getChannelArray(channel, [sx], [sy], [sw], [sh]) ⇒ Array.&lt;Uint8ClampedArray&gt;](#getchannelarraychannel-sx-sy-sw-sh--arrayuint8clampedarray)
+  * [getRgbaArray([sx], [sy], [sw], [sh]) ⇒ Array.&lt;Array.&lt;Uint8ClampedArray&gt;&gt;](#getrgbaarraysx-sy-sw-sh--arrayarrayuint8clampedarray)
 
 ---
 
