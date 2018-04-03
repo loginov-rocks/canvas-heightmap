@@ -3,6 +3,23 @@
  */
 class CanvasHeightmap {
   /**
+   * Transform flat array to 2D divided by rows and cols.
+   * @param {Array|Uint8ClampedArray} flatArray
+   * @param {number} width
+   * @return {Array}
+   * @private
+   */
+  static _transformFlatTo2d(flatArray, width) {
+    const array = [];
+
+    for (let i = 0; i < flatArray.length; i += width) {
+      array.push(flatArray.slice(i, i + width));
+    }
+
+    return array;
+  }
+
+  /**
    * Canvas Heightmap constructor.
    */
   constructor() {
@@ -58,9 +75,9 @@ class CanvasHeightmap {
           resolve(this._source);
         };
       } else if ([
-            'HTMLImageElement',
-            'HTMLCanvasElement',
-          ].indexOf(source.constructor.name) >= 0) {
+        'HTMLImageElement',
+        'HTMLCanvasElement',
+      ].indexOf(source.constructor.name) >= 0) {
         this._source = source;
         resolve(this._source);
       } else {
@@ -160,31 +177,14 @@ class CanvasHeightmap {
    */
   getFlatChannelArray(channel, sx = 0, sy = 0, sw = this._width,
                       sh = this._height) {
-    if (['red', 'green', 'blue', 'alpha'].indexOf(channel) === -1) {
+    let i = ['red', 'green', 'blue', 'alpha'].indexOf(channel);
+
+    if (i === -1) {
       throw new Error('Unknown channel');
     }
 
     const flatArray = this.getFlatArray(sx, sy, sw, sh);
     const flatChannelArray = new Uint8ClampedArray(flatArray.length / 4);
-
-    let i = 0;
-
-    switch (channel) {
-      case 'red':
-        break;
-
-      case 'green':
-        i = 1;
-        break;
-
-      case 'blue':
-        i = 2;
-        break;
-
-      case 'alpha':
-        i = 3;
-        break;
-    }
 
     for (let j = 0; i < flatArray.length; i += 4, j++) {
       flatChannelArray[j] = flatArray[i];
@@ -232,8 +232,8 @@ class CanvasHeightmap {
    * @return {Array<Uint8ClampedArray>}
    */
   getAverageArray(sx = 0, sy = 0, sw = this._width, sh = this._height) {
-    return this.constructor.
-        _transformFlatTo2d(this.getFlatAverageArray(sx, sy, sw, sh), sw);
+    return this.constructor._transformFlatTo2d(
+        this.getFlatAverageArray(sx, sy, sw, sh), sw);
   }
 
   /**
@@ -252,9 +252,8 @@ class CanvasHeightmap {
    */
   getChannelArray(channel, sx = 0, sy = 0, sw = this._width,
                   sh = this._height) {
-    return this.constructor.
-        _transformFlatTo2d(this.getFlatChannelArray(channel, sx, sy, sw, sh),
-            sw);
+    return this.constructor._transformFlatTo2d(
+        this.getFlatChannelArray(channel, sx, sy, sw, sh), sw);
   }
 
   /**
@@ -271,25 +270,8 @@ class CanvasHeightmap {
    * @return {Array<Array<Uint8ClampedArray>>}
    */
   getRgbaArray(sx = 0, sy = 0, sw = this._width, sh = this._height) {
-    return this.constructor.
-        _transformFlatTo2d(this.getFlatRgbaArray(sx, sy, sw, sh), sw);
-  }
-
-  /**
-   * Transform flat array to 2D divided by rows and cols.
-   * @param {Array} flatArray
-   * @param {number} width
-   * @return {Array}
-   * @private
-   */
-  static _transformFlatTo2d(flatArray, width) {
-    const array = [];
-
-    for (let i = 0; i < flatArray.length; i += width) {
-      array.push(flatArray.slice(i, i + width));
-    }
-
-    return array;
+    return this.constructor._transformFlatTo2d(
+        this.getFlatRgbaArray(sx, sy, sw, sh), sw);
   }
 }
 

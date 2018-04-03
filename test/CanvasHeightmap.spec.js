@@ -26,7 +26,9 @@ const resources = {
   },
 };
 
-describe('CanvasHeightmap', () => {
+describe('CanvasHeightmap', function() {
+  this.timeout(10000); // eslint-disable-line no-invalid-this
+
   let ch;
 
   // Create new instance before each test.
@@ -219,7 +221,7 @@ describe('CanvasHeightmap', () => {
           });
     });
 
-    it('should return the same data for each of RGB channels as' +
+    it('should return the same data for each of RGB channels as ' +
         '`getFlatAverageArray` for black and white image', () => {
       return ch.use(resources.blackAndWhite.url).
           then(() => {
@@ -271,11 +273,148 @@ describe('CanvasHeightmap', () => {
   });
 
   describe('getAverageArray', () => {
-    // TODO
+    it('should throw an error if canvas is not ready', () => {
+      assert.throws(() => {
+        ch.getAverageArray();
+      });
+    });
+
+    it('should return array with rows number equal to height and cols number ' +
+        'equal to width', () => {
+      return ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+            const array = ch.getAverageArray();
+            // Number of rows.
+            assert.strictEqual(array.length, resources.blackAndWhite.height);
+            // Number of cols for the first row.
+            return assert.strictEqual(array[0].length,
+                resources.blackAndWhite.width);
+          });
+    });
+
+    it('should return cropped array with rows number equal to (height / 2) ' +
+        'and cols number equal to (width / 4)', () => {
+      return ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+
+            const {height, width} = resources.blackAndWhite;
+            const array = ch.getAverageArray(width / 8, height / 4, width / 4,
+                height / 2);
+
+            // Number of rows.
+            assert.strictEqual(array.length, height / 2);
+            // Number of cols for the first row.
+            return assert.strictEqual(array[0].length, width / 4);
+          });
+    });
   });
 
   describe('getChannelArray', () => {
-    // TODO
+    it('should throw an error if canvas is not ready', () => {
+      assert.throws(() => {
+        ch.getChannelArray('red');
+      });
+    });
+
+    it('should throw an error if channel specified is unknown', () => {
+      return assert.isRejected(ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+            ch.getChannelArray('unknown');
+          }));
+    });
+
+    it('should return array for red channel with rows number equal to height ' +
+        'and cols number equal to width', () => {
+      return ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+            const array = ch.getChannelArray('red');
+            // Number of rows.
+            assert.strictEqual(array.length, resources.blackAndWhite.height);
+            // Number of cols for the first row.
+            return assert.strictEqual(array[0].length,
+                resources.blackAndWhite.width);
+          });
+    });
+
+    it('should return array for green channel with rows number equal to ' +
+        'height and cols number equal to width', () => {
+      return ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+            const array = ch.getChannelArray('green');
+            // Number of rows.
+            assert.strictEqual(array.length, resources.blackAndWhite.height);
+            // Number of cols for the first row.
+            return assert.strictEqual(array[0].length,
+                resources.blackAndWhite.width);
+          });
+    });
+
+    it('should return array for blue channel with rows number equal to ' +
+        'height and cols number equal to width', () => {
+      return ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+            const array = ch.getChannelArray('blue');
+            // Number of rows.
+            assert.strictEqual(array.length, resources.blackAndWhite.height);
+            // Number of cols for the first row.
+            return assert.strictEqual(array[0].length,
+                resources.blackAndWhite.width);
+          });
+    });
+
+    it('should return array for alpha channel with rows number equal to ' +
+        'height and cols number equal to width', () => {
+      return ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+            const array = ch.getChannelArray('alpha');
+            // Number of rows.
+            assert.strictEqual(array.length, resources.blackAndWhite.height);
+            // Number of cols for the first row.
+            return assert.strictEqual(array[0].length,
+                resources.blackAndWhite.width);
+          });
+    });
+
+    it('should return cropped array with rows number equal to (height / 2) ' +
+        'and cols number equal to (width / 4)', () => {
+      return ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+
+            const {height, width} = resources.blackAndWhite;
+            const array = ch.getChannelArray('red', width / 8, height / 4,
+                width / 4, height / 2);
+
+            // Number of rows.
+            assert.strictEqual(array.length, height / 2);
+            // Number of cols for the first row.
+            return assert.strictEqual(array[0].length, width / 4);
+          });
+    });
+
+    it('should return the same data for each of RGB channels as ' +
+        '`getAverageArray` for black and white image', () => {
+      return ch.use(resources.blackAndWhite.url).
+          then(() => {
+            ch.draw();
+
+            const redArray = ch.getChannelArray('red');
+            const greenArray = ch.getChannelArray('green');
+            const blueArray = ch.getChannelArray('blue');
+            const averageArray = ch.getAverageArray();
+
+            assert.deepEqual(redArray, averageArray);
+            assert.deepEqual(greenArray, averageArray);
+            return assert.deepEqual(blueArray, averageArray);
+          });
+    });
   });
 
   describe('getRgbaArray', () => {
@@ -300,7 +439,7 @@ describe('CanvasHeightmap', () => {
     });
 
     it('should return cropped array with rows number equal to (height / 2) ' +
-        ' and cols number equal to (width / 4)', () => {
+        'and cols number equal to (width / 4)', () => {
       return ch.use(resources.blackAndWhite.url).
           then(() => {
             ch.draw();
