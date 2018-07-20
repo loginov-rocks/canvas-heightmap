@@ -1,6 +1,6 @@
 {
   "name": "canvas-heightmap",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Canvas heightmap generator",
   "main": "./src/CanvasHeighmap.js",
   "scripts": {
@@ -25,14 +25,14 @@
   },
   "homepage": "https://github.com/1oginov/canvas-heightmap",
   "devDependencies": {
-    "canvas": "^1.6.10",
+    "canvas": "^1.6.11",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
-    "coveralls": "^3.0.0",
-    "eslint": "^5.0.0",
+    "coveralls": "^3.0.2",
+    "eslint": "^5.1.0",
     "eslint-config-google": "^0.9.1",
     "istanbul": "^0.4.5",
-    "jsdom": "^11.7.0",
-    "mocha": "^5.0.5"
+    "jsdom": "^11.11.0",
+    "mocha": "^5.2.0"
   }
 }
