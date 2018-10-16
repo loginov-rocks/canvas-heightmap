@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/1oginov/canvas-heightmap",
   "devDependencies": {
-    "canvas": "^1.6.11",
+    "canvas": "^2.0.1",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "coveralls": "^3.0.2",
