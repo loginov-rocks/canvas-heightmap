@@ -176,7 +176,7 @@ class CanvasHeightmap {
    * @return {Uint8ClampedArray}
    */
   getFlatChannelArray(channel, sx = 0, sy = 0, sw = this._width,
-                      sh = this._height) {
+      sh = this._height) {
     let i = ['red', 'green', 'blue', 'alpha'].indexOf(channel);
 
     if (i === -1) {
@@ -251,7 +251,7 @@ class CanvasHeightmap {
    * @return {Array<Uint8ClampedArray>}
    */
   getChannelArray(channel, sx = 0, sy = 0, sw = this._width,
-                  sh = this._height) {
+      sh = this._height) {
     return this.constructor._transformFlatTo2d(
         this.getFlatChannelArray(channel, sx, sy, sw, sh), sw);
   }
