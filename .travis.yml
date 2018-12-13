@@ -1,23 +1,17 @@
 language: node_js
 node_js:
-  - "node"
+- "node"
 env:
-  - CXX=g++-4.9
+- CXX=g++-4.9
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+    - ubuntu-toolchain-r-test
     packages:
-      - libcairo2-dev
-      - libjpeg8-dev
-      - libpango1.0-dev
-      - libgif-dev
-      - g++-4.9
-before_install:
-  - npm install -g greenkeeper-lockfile@1
-before_script:
-  - greenkeeper-lockfile-update
+    - libcairo2-dev
+    - libjpeg8-dev
+    - libpango1.0-dev
+    - libgif-dev
+    - g++-4.9
 after_success:
-  - npm run coveralls
-after_script:
-  - greenkeeper-lockfile-upload
+- npm run coveralls
