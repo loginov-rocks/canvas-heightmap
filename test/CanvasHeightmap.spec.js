@@ -17,7 +17,7 @@ global.Image = window.Image;
 
 const resources = {
   blackAndWhite: {
-    url: 'https://raw.githubusercontent.com/1oginov/canvas-heightmap/master/test/resources/black-and-white.png',
+    url: 'https://raw.githubusercontent.com/loginov-rocks/canvas-heightmap/master/test/resources/black-and-white.png',
     height: 256,
     width: 256,
   },
