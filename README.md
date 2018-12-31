@@ -1,10 +1,11 @@
 # canvas-heightmap
 
 [![NpmVersion](https://img.shields.io/npm/v/canvas-heightmap.svg)](https://www.npmjs.com/package/canvas-heightmap)
-[![Build Status](https://travis-ci.org/1oginov/canvas-heightmap.svg?branch=master)](https://travis-ci.org/1oginov/canvas-heightmap)
-[![Coverage Status](https://coveralls.io/repos/github/1oginov/canvas-heightmap/badge.svg?branch=master)](https://coveralls.io/github/1oginov/canvas-heightmap?branch=master)
-[![devDependencies Status](https://david-dm.org/1oginov/canvas-heightmap/dev-status.svg)](https://david-dm.org/1oginov/canvas-heightmap?type=dev)
-[![Greenkeeper badge](https://badges.greenkeeper.io/1oginov/canvas-heightmap.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/loginov-rocks/canvas-heightmap.svg?branch=master)](https://travis-ci.org/loginov-rocks/canvas-heightmap)
+[![Coverage Status](https://coveralls.io/repos/github/loginov-rocks/canvas-heightmap/badge.svg?branch=master)](https://coveralls.io/github/loginov-rocks/canvas-heightmap?branch=master)
+[![dependencies Status](https://david-dm.org/loginov-rocks/canvas-heightmap/status.svg)](https://david-dm.org/loginov-rocks/canvas-heightmap)
+[![devDependencies Status](https://david-dm.org/loginov-rocks/canvas-heightmap/dev-status.svg)](https://david-dm.org/loginov-rocks/canvas-heightmap?type=dev)
+[![Greenkeeper badge](https://badges.greenkeeper.io/loginov-rocks/canvas-heightmap.svg)](https://greenkeeper.io/)
 
 Canvas Heightmap is a package to **get images data by pixels, channels or average in different representations** that
 can be used to build heightmaps.
@@ -23,7 +24,7 @@ npm install canvas-heightmap
 const ch = new CanvasHeightmap();
 
 // At first set the source and wait until it would be loaded.
-ch.use('https://raw.githubusercontent.com/1oginov/canvas-heightmap/master/test/resources/black-and-white.png').
+ch.use('https://raw.githubusercontent.com/loginov-rocks/canvas-heightmap/master/test/resources/black-and-white.png').
     then(() => {
       // Secondly invoke draw method to render image to be able to get its data.
       ch.draw();
@@ -197,4 +198,4 @@ between 0 and 255 (included).
 
 ## Contribution
 
-If you want to contribute, please use the [dev](https://github.com/1oginov/canvas-heightmap/tree/dev) branch.
+If you want to contribute, please use the [dev](https://github.com/loginov-rocks/canvas-heightmap/tree/dev) branch.
