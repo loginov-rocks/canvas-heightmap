@@ -81,7 +81,7 @@ class CanvasHeightmap {
         this._source = source;
         resolve(this._source);
       } else {
-        reject('Unknown argument type');
+        reject(new Error('Unknown argument type'));
       }
     });
   }
