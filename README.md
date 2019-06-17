@@ -1,7 +1,7 @@
 # canvas-heightmap
 
 [![NpmVersion](https://img.shields.io/npm/v/canvas-heightmap.svg)](https://www.npmjs.com/package/canvas-heightmap)
-[![Build Status](https://travis-ci.org/loginov-rocks/canvas-heightmap.svg?branch=master)](https://travis-ci.org/loginov-rocks/canvas-heightmap)
+[![Build Status](https://travis-ci.com/loginov-rocks/canvas-heightmap.svg?branch=master)](https://travis-ci.com/loginov-rocks/canvas-heightmap)
 [![Coverage Status](https://coveralls.io/repos/github/loginov-rocks/canvas-heightmap/badge.svg?branch=master)](https://coveralls.io/github/loginov-rocks/canvas-heightmap?branch=master)
 [![dependencies Status](https://david-dm.org/loginov-rocks/canvas-heightmap/status.svg)](https://david-dm.org/loginov-rocks/canvas-heightmap)
 [![devDependencies Status](https://david-dm.org/loginov-rocks/canvas-heightmap/dev-status.svg)](https://david-dm.org/loginov-rocks/canvas-heightmap?type=dev)
