@@ -3,14 +3,13 @@
 [![NpmVersion](https://img.shields.io/npm/v/canvas-heightmap.svg)](https://www.npmjs.com/package/canvas-heightmap)
 [![Build Status](https://travis-ci.com/loginov-rocks/canvas-heightmap.svg?branch=master)](https://travis-ci.com/loginov-rocks/canvas-heightmap)
 [![Coverage Status](https://coveralls.io/repos/github/loginov-rocks/canvas-heightmap/badge.svg?branch=master)](https://coveralls.io/github/loginov-rocks/canvas-heightmap?branch=master)
-[![dependencies Status](https://david-dm.org/loginov-rocks/canvas-heightmap/status.svg)](https://david-dm.org/loginov-rocks/canvas-heightmap)
 [![devDependencies Status](https://david-dm.org/loginov-rocks/canvas-heightmap/dev-status.svg)](https://david-dm.org/loginov-rocks/canvas-heightmap?type=dev)
 [![Greenkeeper badge](https://badges.greenkeeper.io/loginov-rocks/canvas-heightmap.svg)](https://greenkeeper.io/)
 
 Canvas Heightmap is a package to **get images data by pixels, channels or average in different representations** that
 can be used to build heightmaps.
 
-## Quick Start
+## Quick start
 
 ### Install
 
@@ -195,7 +194,3 @@ between 0 and 255 (included).
 | [sy]      | `number` | `0`            | The y coordinate of the upper left corner of the rectangle from which the data will be extracted. |
 | [sw]      | `number` | `this._width`  | The width of the rectangle from which the data will be extracted.                                 |
 | [sh]      | `number` | `this._height` | The height of the rectangle from which the data will be extracted.                                |
-
-## Contribution
-
-If you want to contribute, please use the [dev](https://github.com/loginov-rocks/canvas-heightmap/tree/dev) branch.
