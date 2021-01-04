@@ -4,9 +4,6 @@
   "description": "Canvas heightmap generator",
   "main": "src/CanvasHeighmap.js",
   "scripts": {
-    "check": "npm run lint && npm test",
-    "clean:coverage": "rimraf coverage",
-    "coveralls": "npm run clean:coverage && npm run test:coverage -- --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "lint": "eslint src test",
     "test": "mocha",
     "test:coverage": "istanbul cover ./node_modules/mocha/bin/_mocha"
@@ -27,15 +24,13 @@
   },
   "homepage": "https://github.com/loginov-rocks/canvas-heightmap",
   "devDependencies": {
-    "canvas": "^2.6.0",
+    "canvas": "^2.6.1",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "coveralls": "^3.0.6",
-    "eslint": "^6.5.1",
+    "eslint": "^7.17.0",
     "eslint-config-google": "^0.14.0",
     "istanbul": "^0.4.5",
-    "jsdom": "^16.0.1",
-    "mocha": "^7.0.1",
-    "rimraf": "^3.0.0"
+    "jsdom": "^16.4.0",
+    "mocha": "^8.2.1"
   }
 }
