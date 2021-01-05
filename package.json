@@ -1,6 +1,6 @@
 {
   "name": "canvas-heightmap",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Canvas heightmap generator",
   "main": "src/CanvasHeighmap.js",
   "scripts": {

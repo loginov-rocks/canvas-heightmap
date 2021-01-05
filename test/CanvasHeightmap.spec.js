@@ -17,7 +17,7 @@ global.Image = window.Image;
 
 const resources = {
   blackAndWhite: {
-    url: 'https://raw.githubusercontent.com/loginov-rocks/canvas-heightmap/master/test/resources/black-and-white.png',
+    url: 'https://raw.githubusercontent.com/loginov-rocks/canvas-heightmap/main/test/resources/black-and-white.png',
     height: 256,
     width: 256,
   },
@@ -28,6 +28,20 @@ const resources = {
 
 describe('CanvasHeightmap', function() {
   this.timeout(10000); // eslint-disable-line no-invalid-this
+
+  before(() => {
+    // "onerror" stopped work in the jsdom + canvas environment for some reason.
+    // @see https://github.com/jsdom/jsdom/issues/1816
+    Object.defineProperty(global.Image.prototype, 'src', {
+      set(src) {
+        if (src === resources.unknown.url) {
+          setTimeout(() => this.onerror(new Error()));
+        } else {
+          this.setAttribute('src', src);
+        }
+      },
+    });
+  });
 
   let ch;
 
