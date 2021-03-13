@@ -1,7 +1,8 @@
 # canvas-heightmap
 
 [![npm](https://img.shields.io/npm/v/canvas-heightmap)](https://www.npmjs.com/package/canvas-heightmap)
-[![CI](https://github.com/loginov-rocks/canvas-heightmap/workflows/CI/badge.svg)](https://github.com/loginov-rocks/canvas-heightmap/actions)
+[![CI](https://github.com/loginov-rocks/canvas-heightmap/actions/workflows/ci.yml/badge.svg)](https://github.com/loginov-rocks/canvas-heightmap/actions/workflows/ci.yml)
+[![CD](https://github.com/loginov-rocks/canvas-heightmap/actions/workflows/cd.yml/badge.svg)](https://github.com/loginov-rocks/canvas-heightmap/actions/workflows/cd.yml)
 [![Coverage Status](https://coveralls.io/repos/github/loginov-rocks/canvas-heightmap/badge.svg?branch=main)](https://coveralls.io/github/loginov-rocks/canvas-heightmap?branch=main)
 
 Canvas Heightmap is a package to **get images data by pixels, channels or average in different representations** that
